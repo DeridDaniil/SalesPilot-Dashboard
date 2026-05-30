@@ -1,188 +1,179 @@
 # SalesPilot Dashboard
 
-Фронтенд-панель CRM для управления клиентами, лидами и менеджерами по продажам. Реализован UI-слой продукта SalesPilot; бэкенд ещё не подключён, поэтому все данные подаются из мок-сидов, сохраняемых в `localStorage`.
+**EN —** Frontend-only CRM dashboard demo with role-based UI, client and lead management, analytics, and responsive layout.
+**RU —** Русскоязычный demo CRM dashboard с ролями, клиентами, лидами, аналитикой и адаптивным интерфейсом.
 
-Интерфейс и демо-данные локализованы под русский рынок: русскоязычные имена, компании и контакты, а денежные суммы отображаются в рублях (`₽`, формат `Intl.NumberFormat('ru-RU')`).
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2-764ABC?logo=redux&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-3-22C7D6)
+![Vitest](https://img.shields.io/badge/Vitest-4-6E9F18?logo=vitest&logoColor=white)
 
-> **Portfolio note:** This is a frontend-only CRM dashboard demo built to demonstrate routing, role-based UI, CRUD flows, state management, charts, local persistence and responsive layout. The UI and demo data are Russian-localized and amounts are shown in rubles (₽). It is intentionally not a production-ready CRM — there is no backend, authentication is demo-only, and passwords are stored in plain text purely for the mock/demo mode.
+## 🔗 Links / Ссылки
 
-## Стек технологий
+- **Live Demo:** https://sales-pilot-dashboard.vercel.app/
+- **GitHub Repository:** https://github.com/DeridDaniil/SalesPilot-Dashboard
 
-- **React 19** + **TypeScript**
-- **Vite** (дев-сервер, сборка, preview)
-- **Redux Toolkit** + **react-redux** (управление состоянием через слайсы и thunk-и)
-- **React Router 7** (клиентский роутинг)
-- **Recharts** (графики на доске)
-- **ESLint 9** (typescript-eslint, react-hooks, react-refresh)
-- **Vitest** + **jsdom** + **@testing-library/react** (модульные и smoke-тесты)
+---
 
-## Текущие возможности
+## 🇬🇧 English
 
-- Вход и регистрация с ролями пользователей (`admin`, `manager`). Регистрация доступна в demo-режиме по адресу `/register` (новые пользователи создаются с ролью `manager`).
-- Защищённые маршруты с принудительной сменой пароля для временных паролей.
-- Дашборд с KPI, графиком выручки, воронкой конверсии и графиком активности.
-- Список клиентов, карточка клиента, формы создания и редактирования. Админ назначает ответственного менеджера, менеджер видит и ведёт только своих клиентов.
-- Список лидов с формами, конверсией выигранного лида в клиента и видимостью, ограниченной менеджером. При конверсии созданный клиент помечается `convertedFromLead`/`sourceLeadId`, поэтому Conversion Rate на дашборде остаётся корректным даже после удаления выигранного лида из воронки.
-- Страница администрирования менеджеров (только админ): создание, редактирование, сброс пароля, удаление. Встроенные demo-пользователи (`u1`/`u2`/`u3`) защищены от удаления, смены email и смены роли. Менеджера, за которым закреплены клиенты или лиды, удалить нельзя — сервис вернёт понятную ошибку.
-- Страница профиля: редактирование имени/почты/телефона, смена пароля и сброс демо-данных к исходному состоянию.
-- Русскоязычный интерфейс через единый словарь i18n.
-- Адаптивный шелл с гамбургер-меню на мобильных.
-- Страница «Справка» со встроенной справкой, политикой конфиденциальности и условиями использования.
-- Страница 404 для неизвестных маршрутов.
+### Overview
 
-## Поведение мок-данных и localStorage
+**SalesPilot Dashboard** is a frontend-only CRM dashboard demo built as a portfolio case study. It demonstrates a role-based interface, client and lead management, custom UI components, localStorage persistence, responsive layouts, charts, and a demo authentication flow.
 
-У приложения нет бэкенда. При первой загрузке `ensureSeed()` один раз записывает встроенные мок-данные клиентов и лидов в `localStorage`; при последующих загрузках данные читаются оттуда. Аутентификация использует заранее зашитые учётные данные, объединённые с пользователями, созданными через регистрацию или администратором.
+There is **no real backend** — all data is seeded from mock data and persisted in the browser's `localStorage`. Authentication is **demo-only** (no real security). The interface and demo data are localized for the Russian market, and monetary values are shown in rubles (`₽`).
 
-Ключи, записываемые в `localStorage`:
+The app showcases typical CRM scenarios end to end: signing in with different roles, browsing and editing clients, moving leads through a pipeline and converting a won lead into a client, managing users as an admin, and reviewing analytics on the dashboard.
 
-| Ключ                             | Назначение                                     |
-| -------------------------------- | ---------------------------------------------- |
-| `salespilot_user`                | Текущий авторизованный пользователь (сессия).  |
-| `salespilot_registered_users`    | Пользователи, добавленные через регистрацию.   |
-| `salespilot_registered_creds`    | Учётные данные зарегистрированных пользователей. |
-| `salespilot_leads`               | Коллекция лидов.                               |
-| `salespilot_clients`             | Коллекция клиентов.                            |
-| `salespilot_seeded`              | Маркер однократной инициализации сидов.        |
+### Features
 
-### Демо-аккаунты
+- Role-based interface for **admin** and **managers**
+- Demo authentication and registration flow
+- Client management (list, details, create, edit)
+- Lead management and lead-to-client conversion
+- Manager management for the admin role
+- Dashboard analytics with charts (revenue, conversion funnel, weekly activity)
+- Custom dropdown / select component
+- Responsive layout for desktop, tablet and mobile
+- Demo data reset
+- localStorage persistence
+- Russian localized demo data and RUB currency formatting
 
-| Почта                  | Пароль    | Роль    | Пользователь        |
-| ---------------------- | --------- | ------- | ------------------- |
-| `admin@salespilot.ru`  | `admin`   | admin   | Александр Морозов   |
-| `anna@salespilot.ru`   | `manager` | manager | Анна Кузнецова      |
-| `ivan@salespilot.ru`   | `manager` | manager | Иван Соколов        |
+### Portfolio note
 
-Регистрация на `/register` запрашивает имя и фамилию и создаёт нового пользователя с ролью `manager`. Новые пользователи, созданные администратором, получают пароль по умолчанию `12345` и должны сменить его при первом входе.
+This is a frontend-only CRM dashboard demo built to demonstrate routing, role-based UI, CRUD flows, state management, charts, local persistence, custom UI components and responsive layout.
 
-Кнопка **«Сбросить демо-данные»** на странице профиля удаляет все перечисленные выше ключи `localStorage`, заново инициализирует демо-сиды и завершает текущую сессию — приложение возвращается к чистому стартовому состоянию.
+### Limitations
 
-### Текущие ограничения
+- No real backend
+- Demo authentication only
+- Data is stored in `localStorage`
+- Passwords are stored in plain text only inside the mock/demo mode
+- Not intended for production use
 
-- Нет настоящего бэкенда и сетевых запросов — все данные обрабатываются на клиенте.
-- Данные привязаны к конкретному браузеру и теряются при очистке site storage.
-- Нет синхронизации между устройствами, настоящей аутентификации или авторизации за пределами UI.
-- Пароли хранятся в `localStorage` в открытом виде (только для мок-режима, не для продакшена).
-- Нет переключения онлайн/офлайн и согласования оптимистичных обновлений.
+---
 
-## Установка
+## 🇷🇺 Русский
 
-Требуется Node.js 20+ и npm 10+.
+### Обзор
 
-```bash
-npm install
-```
+**SalesPilot Dashboard** — это русскоязычный frontend-only CRM dashboard, созданный как проект для портфолио. Он демонстрирует role-based интерфейс, управление клиентами, лидами и менеджерами, кастомные UI-компоненты, хранение данных в `localStorage`, адаптивную вёрстку, графики и demo-авторизацию.
 
-## Локальный запуск
+В проекте **нет реального backend** — все данные берутся из мок-данных и сохраняются в `localStorage` браузера. Авторизация **демонстрационная** (без настоящей безопасности). Интерфейс и демо-данные локализованы под русский рынок, а денежные значения отображаются в рублях (`₽`).
 
-Запускает дев-сервер Vite с HMR по адресу http://localhost:5173.
+Приложение показывает типичные CRM-сценарии целиком: вход под разными ролями, просмотр и редактирование клиентов, ведение лидов по воронке и конвертацию выигранного лида в клиента, управление пользователями для администратора и просмотр аналитики на дашборде.
 
-```bash
-npm run dev
-```
+### Возможности
 
-## Сборка
+- Интерфейс с ролями **администратора** и **менеджера**
+- Демо-авторизация и регистрация
+- Управление клиентами (список, карточка, создание, редактирование)
+- Управление лидами и конвертация лида в клиента
+- Управление менеджерами для администратора
+- Аналитический дашборд с графиками (выручка, воронка конверсии, активность за неделю)
+- Кастомные dropdown / select компоненты
+- Адаптивная вёрстка для desktop, tablet и mobile
+- Сброс demo-данных
+- Хранение данных в `localStorage`
+- Русскоязычные demo-данные и отображение валюты в рублях
 
-Выполняет проверку типов (`tsc -b`) и собирает продакшен-бандл в папку `dist/`.
+### Примечание для портфолио
 
-```bash
-npm run build
-```
+Это frontend-only demo-проект, созданный для демонстрации маршрутизации, role-based интерфейса, CRUD-сценариев, управления состоянием, графиков, локального хранения данных, кастомных UI-компонентов и адаптивной вёрстки.
 
-## Линтер
+### Ограничения
 
-```bash
-npm run lint
-```
+- Нет реального backend
+- Авторизация демонстрационная
+- Данные хранятся в `localStorage`
+- Пароли хранятся в открытом виде только в рамках mock/demo-режима
+- Проект не предназначен для production-использования
 
-## Тесты
+---
 
-Однократный прогон набора Vitest (юнит + smoke):
+## 👤 Demo accounts / Демо-аккаунты
 
-```bash
-npm test
-```
+| Role / Роль          | Email                  | Password / Пароль | Name / Имя         |
+| -------------------- | ---------------------- | ----------------- | ------------------ |
+| Admin / Администратор | `admin@salespilot.ru` | `admin`           | Александр Морозов  |
+| Manager / Менеджер    | `anna@salespilot.ru`  | `manager`         | Анна Кузнецова     |
+| Manager / Менеджер    | `ivan@salespilot.ru`  | `manager`         | Иван Соколов       |
 
-Режим наблюдения:
+> Users created by the admin get the default password `12345` and must change it on first login. / Пользователи, созданные администратором, получают пароль по умолчанию `12345` и меняют его при первом входе.
 
-```bash
-npm run test:watch
-```
+## 🛠 Tech stack / Стек
 
-Тесты покрывают:
+- **React**
+- **TypeScript**
+- **Vite**
+- **Redux Toolkit**
+- **React Router**
+- **Recharts**
+- **Vitest**
+- **ESLint**
+- **CSS** (plain CSS files + CSS variables / design tokens)
 
-1. Сервис аутентификации — вход, выход, регистрация, смена пароля против мок-хранилища учётных данных.
-2. Сервис лидов — CRUD поверх мок-данных на `localStorage`.
-3. Smoke-тест приложения — рендерит корневой `<App />` внутри `MemoryRouter` и проверяет, что экран входа монтируется для неавторизованных пользователей и приложение стартует с засиженными данными.
-
-Полноценные браузерные E2E-тесты (Playwright/Cypress) намеренно не добавлялись на этом этапе: у приложения ещё нет бэкенда, поэтому тестовая поверхность была бы синтетической и её пришлось бы переписывать после появления реальных API. Smoke-тест на jsdom даёт детерминированный ранний сигнал, что обвязка (роутинг, стор, провайдеры) остаётся целой.
-
-## Preview продакшен-сборки
-
-После `npm run build` локально обслужить папку `dist/`:
-
-```bash
-npm run preview
-```
-
-Адрес по умолчанию: http://localhost:4173.
-
-## Структура проекта
+## 📁 Project structure / Структура проекта
 
 ```
 src/
-├── app/                    # Redux-стор и типизированные хуки
+├── app/              # Redux store + typed hooks
 ├── features/
-│   ├── auth/               # Вход, регистрация, auth-слайс
-│   ├── clients/            # Список клиентов, карточка, форма, слайс
-│   ├── dashboard/          # KPI и графики
-│   ├── leads/              # Список лидов, форма, слайс
-│   ├── managers/           # Администрирование пользователей
-│   ├── not-found/          # Страница 404
-│   ├── profile/            # Профиль и смена пароля
-│   └── rules/              # Правила, политика конфиденциальности, условия
+│   ├── auth/         # Login, registration, auth slice
+│   ├── clients/      # Clients list, details, form, slice
+│   ├── dashboard/    # KPIs and charts
+│   ├── leads/        # Leads board, form, slice, lead → client conversion
+│   ├── managers/     # Admin user management
+│   ├── profile/      # Profile, password change, demo data reset
+│   ├── rules/        # Help / about page
+│   ├── legal/        # Privacy policy & terms
+│   └── not-found/    # 404 page
 ├── shared/
-│   ├── components/         # Sidebar, Header, ProtectedRoute, модалки, StateViews
-│   ├── ui/                 # Переиспользуемые UI-примитивы (CustomSelect)
-│   ├── services/           # authService, clientsService, leadsService, dashboardService, storageService, mockData
-│   ├── styles/             # Общие стили (primitives.css)
-│   ├── utils/              # Хелперы (formatRub — формат валюты)
-│   ├── types/              # Доменные типы (User, Client, Lead, ...)
-│   └── i18n.ts             # Русский словарь UI
-├── test/                   # Настройка Vitest + smoke-тест
-├── App.tsx                 # Дерево маршрутов
-├── main.tsx                # Точка входа
-├── App.css / index.css     # Глобальные стили
+│   ├── components/   # Sidebar, Header, ProtectedRoute, StateViews, ForcePasswordModal
+│   ├── ui/           # Reusable UI primitives (CustomSelect, Modal, useBodyScrollLock)
+│   ├── services/     # auth / clients / leads / dashboard / storage services + mockData
+│   ├── styles/       # Shared primitives.css
+│   ├── utils/        # Helpers (RUB currency formatting)
+│   ├── types/        # Domain types
+│   └── i18n.ts       # Russian UI dictionary
+├── test/             # Vitest setup + smoke test
+├── App.tsx           # Route tree
+└── main.tsx          # Entry point
 ```
 
-## Релиз и запуск
+## 🚀 Getting started / Запуск проекта
 
-Это статическое SPA — подойдёт любой статический хостинг (Netlify, Vercel, Cloudflare Pages, GitHub Pages, S3+CloudFront, nginx).
-
-1. Установить зависимости: `npm ci`
-2. Проверить типы и собрать: `npm run build`
-3. (Опционально) Проверить качество: `npm test && npm run lint`
-4. Smoke-проверка бандла: `npm run preview` и вход под демо-учётной записью.
-5. Задеплоить содержимое `dist/` на статический хостинг. Настроить хостинг так, чтобы на неизвестных путях отдавался `index.html` (SPA-fallback) — тогда глубокие ссылки React Router будут корректно разрешаться.
-
-### Рекомендуемый чек-лист релиза
+Requires Node.js 20+ and npm 10+. / Требуется Node.js 20+ и npm 10+.
 
 ```bash
-npm ci
-npm run lint
-npm test
+# install dependencies / установка зависимостей
+npm install
+
+# start the dev server (http://localhost:5173) / дев-сервер
+npm run dev
+
+# type-check + production build / проверка типов и сборка
 npm run build
-npm run preview   # ручная проверка
+
+# preview the production build / просмотр прод-сборки
+npm run preview
+
+# lint / линтер
+npm run lint
+
+# run tests / тесты
+npm test -- --run
 ```
 
-## Известные ограничения
+## ☁️ Deployment / Деплой
 
-- Бандл собирается в один чанк (~690 КБ). Vite выводит предупреждение о размере чанка; разделение появится вместе с интеграцией бэкенда.
-- Нет настоящей аутентификации — только демо-учётные данные и мок-роли.
-- Нет постоянного хранения за пределами текущего браузера; очистка site storage сбрасывает все данные.
-- Нет переключателя локали — UI-копии только на русском.
-- Доступность не прошла полный аудит.
+Deployed on **Vercel**: https://sales-pilot-dashboard.vercel.app/
 
-## Следующий запланированный шаг
+As a static SPA, it can be hosted on any static host (Vercel, Netlify, Cloudflare Pages, GitHub Pages). Configure the host to serve `index.html` on unknown paths (SPA fallback) so React Router deep links resolve correctly. / Это статическое SPA — подойдёт любой статический хостинг; нужно настроить SPA-fallback на `index.html` для корректной работы deep links React Router.
 
-**Интеграция с бэкендом.** Слой сервисов в [src/shared/services/](src/shared/services/) — это точка, где вызовы `localStorage` будут заменены на реальные HTTP-запросы (auth, clients, leads, dashboard, managers). Redux-слайсы уже ходят в сервисы через thunk-и, поэтому компоненты и редьюсеры менять не придётся — замена локализована в сервисах и бутстрапе сидов в [src/main.tsx](src/main.tsx).
+## ✍️ Author / Автор
+
+Created by **Daniil Derid**
+GitHub: https://github.com/DeridDaniil
