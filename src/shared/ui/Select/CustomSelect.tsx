@@ -88,8 +88,16 @@ export default function CustomSelect({
       placement = 'up';
       maxHeight = Math.min(DESIRED_MENU_HEIGHT, spaceAbove);
     }
+
+    // The menu sizes to its content (min = trigger width), so a compact trigger
+    // still shows full option labels. Keep it inside the viewport horizontally.
+    const menuWidth = menuRef.current?.offsetWidth ?? r.width;
+    let left = r.left;
+    const overflowRight = left + menuWidth - (window.innerWidth - 8);
+    if (overflowRight > 0) left = Math.max(8, left - overflowRight);
+
     setPos({
-      left: r.left,
+      left,
       width: r.width,
       top: r.bottom + GAP,
       bottom: window.innerHeight - r.top + GAP,
@@ -273,7 +281,7 @@ export default function CustomSelect({
             style={{
               position: 'fixed',
               left: pos.left,
-              width: pos.width,
+              minWidth: pos.width,
               maxHeight: pos.maxHeight,
               ...(pos.placement === 'down'
                 ? { top: pos.top }

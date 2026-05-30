@@ -122,6 +122,10 @@
 
 .cs-menu {
   z-index: 1000;
+  /* Grow to fit the longest option (min-width = trigger width is set inline), so a
+     compact trigger never truncates labels; never exceed the viewport. */
+  width: max-content;
+  max-width: calc(100vw - 16px);
   overflow-y: auto;
   padding: 6px;
   background: #1c1c1c;

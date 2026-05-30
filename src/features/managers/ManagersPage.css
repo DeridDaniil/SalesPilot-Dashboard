@@ -259,9 +259,10 @@
 
   .managers-table td {
     display: grid;
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 104px 1fr;
     gap: 12px;
     align-items: center;
+    justify-items: start;
     padding: 8px 0;
     border-bottom: 1px dashed var(--hairline);
     min-height: 36px;
@@ -281,17 +282,27 @@
     color: var(--muted-foreground);
   }
 
+  /* Name cell becomes the card header: avatar + name, full width, no label. */
+  .managers-table td:first-child {
+    display: block;
+    padding: 0 0 12px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--hairline);
+    min-height: 0;
+  }
+
+  .managers-table td:first-child::before {
+    display: none;
+  }
+
   .managers-table td.cell-email {
     font-size: 0.82rem;
-    word-break: break-all;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   .manager-name-cell {
     gap: 10px;
-  }
-
-  .managers-table td:last-child {
-    justify-content: start;
   }
 
   .manager-actions {

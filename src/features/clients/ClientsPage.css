@@ -258,9 +258,10 @@
 
   .clients-table td {
     display: grid;
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 104px 1fr;
     gap: 12px;
     align-items: center;
+    justify-items: start;
     padding: 7px 0;
     border-bottom: 1px dashed var(--hairline);
     min-height: 32px;
@@ -279,17 +280,34 @@
     color: var(--muted-foreground);
   }
 
+  /* Name cell becomes the card header: full width, no label, name + email stacked. */
+  .clients-table td:first-child {
+    display: block;
+    padding: 0 0 10px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--hairline);
+    min-height: 0;
+  }
+
+  .clients-table td:first-child::before {
+    display: none;
+  }
+
   .clients-table td.cell-mono,
   .clients-table td.cell-muted {
     font-size: 0.85rem;
   }
 
   .client-name-link {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .client-email {
-    margin-top: 2px;
-    word-break: break-word;
+    margin-top: 3px;
+    font-size: 0.8rem;
+    /* Full-width header row now — keep the email on one line; only wrap if a very
+       long address genuinely doesn't fit (never orphan a single character). */
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 }
