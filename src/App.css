@@ -1,0 +1,77 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: transparent;
+}
+
+.app-main {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  min-width: 0;
+  padding: var(--content-pad-y) var(--content-pad-x);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app-main > * {
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Mobile hamburger ── */
+
+.btn-hamburger {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 90;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-fast);
+}
+
+.btn-hamburger:hover {
+  background: var(--surface-card-hover);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1200px) {
+  .app-main {
+    padding: 28px 28px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    padding: 24px 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    margin-left: 0;
+    padding: 72px 16px 28px;
+  }
+
+  .btn-hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    padding: 68px 14px 24px;
+  }
+}

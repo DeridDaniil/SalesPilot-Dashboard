@@ -1,0 +1,284 @@
+@import './shared/styles/primitives.css';
+
+/* ── Dark-only theme tokens (contract) ── */
+
+:root {
+  --card: #1f1f1f;
+  --ring: #f59e0b;
+  --input: #2a2a2a;
+  --muted: #232323;
+  --accent: #92400e;
+  --border: #2e2e2e;
+  --radius: 0.5rem;
+  --chart-1: #fbbf24;
+  --chart-2: #d97706;
+  --chart-3: #92400e;
+  --chart-4: #b45309;
+  --chart-5: #92400e;
+  --popover: #1f1f1f;
+  --primary: #f59e0b;
+  --sidebar: #111111;
+  --spacing: 0.25rem;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-sans: 'Albert Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Manrope', 'Albert Sans', ui-sans-serif, system-ui, sans-serif;
+  --secondary: #222222;
+  --background: #141414;
+  --font-serif: 'Source Serif 4', serif;
+  --foreground: #ececec;
+  --destructive: #ef4444;
+  --shadow-blur: 8px;
+  --shadow-color: hsl(0 0% 0%);
+  --sidebar-ring: #f59e0b;
+  --shadow-spread: -1px;
+  --letter-spacing: 0em;
+  --shadow-opacity: 0.1;
+  --sidebar-accent: #92400e;
+  --sidebar-border: #2e2e2e;
+  --card-foreground: #ececec;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 4px;
+  --sidebar-primary: #f59e0b;
+  --muted-foreground: #9a9a9a;
+  --accent-foreground: #fde68a;
+  --popover-foreground: #ececec;
+  --primary-foreground: #000000;
+  --sidebar-foreground: #ececec;
+  --secondary-foreground: #ececec;
+  --destructive-foreground: #ffffff;
+  --sidebar-accent-foreground: #fde68a;
+  --sidebar-primary-foreground: #ffffff;
+
+  /* Utility: surface hierarchy (new, additive) */
+  --surface-base: #141414;
+  --surface-raised: #1a1a1a;
+  --surface-card: #1f1f1f;
+  --surface-card-hover: #242424;
+  --surface-overlay: rgba(255, 255, 255, 0.02);
+  --hairline: rgba(255, 255, 255, 0.06);
+  --hairline-strong: rgba(255, 255, 255, 0.09);
+
+  /* Utility: status colors */
+  --success: #2dd4a0;
+  --success-dim: rgba(45, 212, 160, 0.10);
+  --warning: #f0b429;
+  --warning-dim: rgba(240, 180, 41, 0.10);
+  --danger: #ef4444;
+  --danger-dim: rgba(240, 82, 82, 0.10);
+  --blue: #4f8ff7;
+  --blue-dim: rgba(79, 143, 247, 0.10);
+  --cyan: #22c7d6;
+  --cyan-dim: rgba(34, 199, 214, 0.10);
+
+  /* Utility: derived from contract */
+  --primary-dim: rgba(245, 158, 11, 0.12);
+  --primary-soft: rgba(245, 158, 11, 0.06);
+  --primary-glow: rgba(245, 158, 11, 0.22);
+
+  /* Utility: radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Utility: spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 56px;
+  --space-10: 72px;
+
+  /* Utility: shadows — softer, crisper */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.38), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.28);
+  --shadow-glow: 0 0 0 1px rgba(245, 158, 11, 0.18), 0 10px 30px -8px rgba(245, 158, 11, 0.4);
+  --shadow-inset-top: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* Utility: typography rhythm */
+  --text-2xs: 0.68rem;
+  --text-xs: 0.76rem;
+  --text-sm: 0.86rem;
+  --text-base: 0.94rem;
+  --text-md: 1.02rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.9rem;
+  --text-3xl: 2.4rem;
+  --tracking-tight: -0.02em;
+  --tracking-eyebrow: 0.14em;
+
+  /* Utility: layout */
+  --sidebar-width: 248px;
+  --header-height: 68px;
+  --content-max: 1360px;
+  --content-pad-x: 40px;
+  --content-pad-y: 32px;
+
+  /* Utility: transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(245, 158, 11, 0.04), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(79, 143, 247, 0.035), transparent 60%),
+    var(--background);
+  color: var(--foreground);
+  line-height: 1.55;
+  min-height: 100vh;
+  letter-spacing: -0.005em;
+  /* Guard against accidental horizontal scroll on small screens
+     (e.g. the off-canvas sidebar, wide grids). */
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14.5px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight);
+  color: var(--foreground);
+}
+
+p { color: inherit; }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--chart-1);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+input, select, textarea {
+  font-family: var(--font-sans);
+  outline: none;
+  color: inherit;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--hairline);
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2e2e2e;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #454545;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* ── Utility keyframes ── */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* `backwards` (not `both`): the entrance animation must NOT retain a transform
+   after it finishes, otherwise the element becomes a containing block and traps
+   `position: fixed` / `sticky` descendants (e.g. modal overlays, the profile
+   sticky panel). `backwards` keeps the pre-animation frame to avoid a flash but
+   reverts to the untransformed base state once the animation ends. */
+.fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+

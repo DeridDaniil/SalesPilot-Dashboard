@@ -1,0 +1,189 @@
+/* ── CustomSelect ── */
+
+.cs {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.cs--full {
+  display: flex;
+  width: 100%;
+}
+
+.cs-label {
+  /* inherits .field-label */
+}
+
+.cs-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.cs-trigger:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.cs-trigger--open,
+.cs-trigger:focus-visible {
+  border-color: var(--ring);
+  background-color: var(--surface-card);
+  box-shadow: 0 0 0 4px var(--primary-dim);
+  outline: none;
+}
+
+.cs-trigger--error {
+  border-color: var(--danger);
+}
+
+.cs-trigger--error.cs-trigger--open,
+.cs-trigger--error:focus-visible {
+  box-shadow: 0 0 0 4px var(--danger-dim);
+}
+
+.cs-trigger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cs-trigger--sm {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+/* Ghost variant — for compact inline triggers (e.g. lead card status). */
+.cs-trigger--ghost {
+  width: auto;
+  padding: 3px 8px;
+  gap: 6px;
+  background: transparent;
+  border-color: transparent;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.cs-trigger--ghost:hover:not(:disabled) {
+  background: var(--surface-overlay);
+  border-color: var(--hairline-strong);
+}
+
+.cs-trigger--ghost.cs-trigger--open {
+  background: var(--surface-overlay);
+  box-shadow: none;
+}
+
+.cs-value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cs-placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.8;
+}
+
+.cs-arrow {
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.cs-trigger--open .cs-arrow {
+  transform: rotate(180deg);
+  color: var(--primary);
+}
+
+.cs-trigger--ghost .cs-arrow {
+  width: 13px;
+  height: 13px;
+}
+
+/* ── Portal menu ── */
+
+.cs-menu {
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 6px;
+  background: #1c1c1c;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  animation: csMenuIn 0.14s ease both;
+}
+
+@keyframes csMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cs-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cs-option-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cs-option--active {
+  background: var(--surface-card-hover);
+}
+
+.cs-option--selected {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.cs-option--selected.cs-option--active {
+  background: var(--primary-dim);
+}
+
+.cs-check {
+  flex-shrink: 0;
+  color: var(--primary);
+}
+
+.cs-option--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cs-option--disabled.cs-option--active {
+  background: transparent;
+}

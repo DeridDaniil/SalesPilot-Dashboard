@@ -1,0 +1,23 @@
+/* Constrain the form page to a comfortable reading width (overrides the
+   wide content cap from App.css for this route). */
+.app-main > .client-form-page {
+  max-width: 920px;
+}
+
+.client-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 26px 26px 22px;
+  box-shadow: var(--shadow-xs), var(--shadow-inset-top);
+}
+
+@media (max-width: 560px) {
+  .client-form {
+    padding: 18px 16px 16px;
+    gap: 16px;
+  }
+}

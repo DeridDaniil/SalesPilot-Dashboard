@@ -1,0 +1,154 @@
+/* ── Grid ── */
+
+.leads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.lead-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  transition: all var(--transition-fast);
+  animation: fadeIn 0.35s ease both;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs), var(--shadow-inset-top);
+}
+
+.lead-card:hover {
+  border-color: var(--hairline-strong);
+  box-shadow: var(--shadow-md), var(--shadow-inset-top);
+  transform: translateY(-2px);
+}
+
+/* ── Won conversion animation ── */
+
+.lead-card--converted {
+  animation: wonPulse 1.7s ease both;
+  border-color: var(--success);
+}
+
+@keyframes wonPulse {
+  0% { box-shadow: 0 0 0 0 rgba(45, 212, 160, 0.4); }
+  35% { box-shadow: 0 0 24px 4px rgba(45, 212, 160, 0.3); border-color: var(--success); }
+  100% { box-shadow: 0 0 0 0 rgba(45, 212, 160, 0); }
+}
+
+.lead-card--leaving {
+  animation: leadLeave 0.48s cubic-bezier(0.55, 0, 0.35, 1) forwards;
+  pointer-events: none;
+  transform-origin: center top;
+  will-change: max-height, opacity, transform, padding;
+}
+
+@keyframes leadLeave {
+  0% {
+    max-height: 520px;
+    opacity: 1;
+    transform: scale(1);
+    margin: 0;
+  }
+  40% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  100% {
+    max-height: 0;
+    opacity: 0;
+    transform: scale(0.9);
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    margin: 0;
+  }
+}
+
+.lead-converted-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(45, 212, 160, 0.12);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+  color: var(--success);
+  font-size: 0.85rem;
+  font-weight: 700;
+  animation: fadeIn 0.3s ease both;
+  border-radius: var(--radius-md);
+}
+
+.lead-converted-overlay svg {
+  animation: checkDraw 0.4s ease 0.15s both;
+}
+
+@keyframes checkDraw {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ── Card header ── */
+
+.lead-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.lead-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.lead-value {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.lead-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 2px;
+}
+
+.lead-company {
+  font-size: 0.82rem;
+  color: var(--muted-foreground);
+  margin-bottom: 14px;
+}
+
+.lead-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+  margin-bottom: 14px;
+}
+
+.lead-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 480px) {
+  .leads-grid {
+    grid-template-columns: 1fr;
+  }
+}

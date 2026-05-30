@@ -1,0 +1,140 @@
+/* ── Grid ── */
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.detail-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs), var(--shadow-inset-top);
+  padding: 24px;
+  animation: fadeIn 0.35s ease both;
+}
+
+.detail-card:nth-child(1) { animation-delay: 0ms; }
+.detail-card:nth-child(2) { animation-delay: 60ms; }
+.detail-card:nth-child(3) { animation-delay: 120ms; }
+.detail-card:nth-child(4) { animation-delay: 180ms; }
+
+.detail-card--notes {
+  grid-column: 1 / -1;
+}
+
+.detail-card-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--muted-foreground);
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+/* ── Rows ── */
+
+.detail-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-label {
+  font-size: 0.82rem;
+  color: var(--muted-foreground);
+}
+
+.detail-value {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--foreground);
+  text-align: right;
+}
+
+/* ── Revenue ── */
+
+.revenue-display {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.revenue-amount {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--success);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.revenue-label {
+  font-size: 0.78rem;
+  color: var(--muted-foreground);
+}
+
+/* ── Notes ── */
+
+.notes-text {
+  font-size: 0.88rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+
+/* ── Status badge ── */
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.detail-card .status-active {
+  background: var(--success-dim);
+  color: var(--success);
+}
+
+.detail-card .status-inactive {
+  background: var(--input);
+  color: var(--muted-foreground);
+}
+
+.detail-card .status-prospect {
+  background: var(--blue-dim);
+  color: var(--blue);
+}
+
+.detail-card .status-churned {
+  background: var(--danger-dim);
+  color: var(--danger);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-card--notes {
+    grid-column: auto;
+  }
+
+  .detail-card {
+    padding: 18px;
+  }
+}
